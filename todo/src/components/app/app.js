@@ -7,6 +7,8 @@ import StatusFilter from '../status-filter';
 import TodoListItemAdd from '../todo-list-item-add';
 
 export default class App extends Component {
+  maxId = 100;
+
   state = {
     todoData: [
       this.createItem(1, 'Drink coffee'),
@@ -32,10 +34,9 @@ export default class App extends Component {
     })
   }
 
-  addItem = () => {
+  addItem = (text) => {
     this.setState(({ todoData }) => {
-      const idx = todoData.length + 1;
-      const text = document.getElementsByClassName("todo-list-item-input")[0].value;
+      const idx = ++this.maxId;
       return {
         todoData: text ? [...todoData, this.createItem(idx, text)] : todoData
       }
@@ -54,7 +55,6 @@ export default class App extends Component {
     const idx = arr.findIndex((el) => el.id === id);
     const oldItem = arr[idx];
     const newItem = { ...oldItem, [propName]: !oldItem.[propName] };
-    console.log([...arr.slice(0, idx), newItem, ...arr.slice(idx + 1)]);
     return [...arr.slice(0, idx), newItem, ...arr.slice(idx + 1)];
   }
 
