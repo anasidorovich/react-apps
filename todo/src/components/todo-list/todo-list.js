@@ -12,7 +12,7 @@ const TodoList = ({ todos, onDelete, onToggleImportant, onToggleDone }) => {
           onDelete={() => onDelete(id)}
           onToggleImportant={() => onToggleImportant(id)}
           onToggleDone={() => onToggleDone(id)}
-          />
+        />
       </li>
     );
   });

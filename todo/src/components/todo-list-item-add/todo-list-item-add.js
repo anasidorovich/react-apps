@@ -7,7 +7,7 @@ export default class TodoListItemAdd extends React.Component {
     return (
       <div className="todo-list-item-add">
         <input className="todo-list-item-input" placeholder='' />
-        <button className="btn btn-secondary active"  onClick = { onAdd } >Add Item</button>
+        <button className="btn btn-secondary active" onClick={onAdd} >Add Item</button>
       </div>
     );
   }
