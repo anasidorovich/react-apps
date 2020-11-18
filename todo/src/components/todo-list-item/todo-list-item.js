@@ -49,19 +49,3 @@ export default class TodoListItem extends Component {
     );
   }
 }
-
-/*
-const TodoListItemFunc = (props) => {
-  return (
-    <span className="todo-list-item d-flex">
-      <span className="todo-list-item-label">{props.label}</span>
-      <button type="button" className="btn btn-outline-danger">
-        <i className="far fa-trash-alt"></i>
-      </button>
-      <button type="button" className="btn btn-outline-info">
-        <i className="fa fa-exclamation"></i>
-      </button>
-    </span>
-  );
-}
-*/
