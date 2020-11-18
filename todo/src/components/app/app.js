@@ -12,16 +12,17 @@ export default class App extends Component {
   state = {
     todoData: [
       this.createItem(1, 'Drink coffee'),
-      this.createItem(2, 'Learn React'),
+      this.createItem(2, 'Learn React', true),
       this.createItem(3, 'Have a lunch')
     ],
-    term: ''
+    term: '',
+    type: 'all'
   };
 
-  createItem(id, label) {
+  createItem(id, label, important = false) {
     return {
       label: label,
-      important: false,
+      important: important,
       id: id
     };
   };
@@ -43,13 +44,18 @@ export default class App extends Component {
     this.setState({ term });
   };
 
+  filterForItems(arr, type) {
+    if (type === 'active') {
+      return arr.filter((el) => el.important);
+    }
+    if (type === 'done') {
+      return arr.filter((el) => el.done);
+    }
+    return arr;
+  };
+
   filterItems = (type) => {
-    this.setState(({ todoData }) => {
-      const newTodoData = todoData.filter((el) => el.done);
-      return {
-        todoData: newTodoData
-      }
-    });
+    this.setState({ type });
   };
 
   addItem = (text) => {
@@ -85,8 +91,9 @@ export default class App extends Component {
   };
 
   render() {
-    const { todoData, term } = this.state;
-    const visibleItems = this.searchForItems(todoData, term);
+    const { todoData, term, type } = this.state;
+    let visibleItems = this.searchForItems(todoData, term);
+    visibleItems = this.filterForItems(visibleItems, type);
     const doneCount = todoData.filter((el) => el.done).length;
     const todoCount = todoData.length - doneCount;
     return (
@@ -94,7 +101,7 @@ export default class App extends Component {
         <AppHeader todo={todoCount} done={doneCount} />
         <div className="search-panel d-flex">
           <SearchPanel onSearchFilter={this.searchItems} />
-          <StatusFilter />
+          <StatusFilter onFilter={this.filterItems} />
         </div>
         <TodoList todos={visibleItems}
           onDelete={this.deleteItem}
