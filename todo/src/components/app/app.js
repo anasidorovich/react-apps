@@ -37,7 +37,8 @@ export default class App extends Component {
   };
 
   searchForItems(arr, term) {
-    return term ? arr.filter((el) => el.label.toLowerCase().includes(term.toLowerCase())) : arr;
+    const text = term.trim().toLowerCase();
+    return text ? arr.filter((el) => el.label.trim().toLowerCase().includes(text)) : arr;
   };
 
   searchItems = (term) => {
@@ -62,7 +63,7 @@ export default class App extends Component {
     this.setState(({ todoData }) => {
       const idx = ++this.maxId;
       return {
-        todoData: text ? [...todoData, this.createItem(idx, text)] : todoData
+        todoData: text.trim() ? [...todoData, this.createItem(idx, text)] : todoData
       }
     })
   };
