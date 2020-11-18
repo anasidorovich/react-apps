@@ -37,7 +37,7 @@ export default class App extends Component {
   };
 
   searchForItems(arr, term) {
-    return term ? arr.filter((el) => el.label.includes(term)) : arr;
+    return term ? arr.filter((el) => el.label.toLowerCase().includes(term.toLowerCase())) : arr;
   };
 
   searchItems = (term) => {
