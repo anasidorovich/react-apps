@@ -1,0 +1,9 @@
+#root {
+   margin: 0 auto;
+   width: 550px;
+}
+
+.search-panel {
+   justify-content: space-between;
+   margin: 1rem;
+}

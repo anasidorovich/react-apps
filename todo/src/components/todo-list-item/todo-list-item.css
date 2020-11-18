@@ -1,0 +1,19 @@
+.todo-list-item-label {
+  flex-grow: 3;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.todo-list-item button {
+  margin: 0.25rem;
+  width: 40px;
+}
+
+.todo-list-item.done .todo-list-item-label {
+  text-decoration: line-through;
+}
+
+.todo-list-item.important .todo-list-item-label {
+  font-weight: bold;
+  color: steelblue;
+}
