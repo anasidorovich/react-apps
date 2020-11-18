@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 
 export default class StatusFilter extends Component {
-  state = {
-    type: 'all'
-  };
-
   changeFilterState(e) {
     const { children } = e.currentTarget;
     [...children].forEach((child) => {
@@ -16,9 +12,7 @@ export default class StatusFilter extends Component {
   onToggleFilter = (e) => {
     e.preventDefault();
     this.changeFilterState(e);
-    const type = e.target.innerText.toLowerCase();
-    this.setState({ type });
-    this.props.onFilter(type);
+    this.props.onFilter(e.target.innerText.toLowerCase());
   };
 
   render() {
