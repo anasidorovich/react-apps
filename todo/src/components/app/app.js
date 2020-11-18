@@ -46,7 +46,7 @@ export default class App extends Component {
 
   filterForItems(arr, type) {
     if (type === 'active') {
-      return arr.filter((el) => el.important);
+      return arr.filter((el) => !el.done);
     }
     if (type === 'done') {
       return arr.filter((el) => el.done);
