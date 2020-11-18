@@ -36,15 +36,43 @@ export default class App extends Component {
       })
    }
 
+   toggleImportant = (id) => {
+     this.setState(({ todoData }) => {
+       const idx = todoData.findIndex((el) => el.id === id);
+       return {
+          todoData: [...todoData.slice(0, idx), ...todoData.slice(idx + 1)]
+       }
+     });
+   }
+
+   toggleDone = (id) => {
+     this.setState(({ todoData }) => {
+       const idx = todoData.findIndex((el) => el.id === id);
+       const oldItem = todoData[idx];
+       const newItem = { ...oldItem, done: !oldItem.done };
+       console.log([...todoData.slice(0, idx), newItem, ...todoData.slice(idx + 1)]);
+       return {
+         todoData: [...todoData.slice(0, idx), newItem, ...todoData.slice(idx + 1)]
+       }
+     });
+   }
+
   render() {
+    const { todoData } = this.state;
+    const doneCount = todoData.filter((el) => el.done).length;
+    const todoCount = todoData.length - doneCount;
     return (
       <div className="todo-container">
-        <AppHeader todo="2" done="1" />
+        <AppHeader todo={ todoCount } done={ doneCount } />
         <div className="search-panel d-flex">
           <SearchPanel />
           <StatusFilter />
         </div>
-        <TodoList todos={this.state.todoData} onDelete={this.deleteItem} />
+        <TodoList todos={todoData}
+          onDelete={this.deleteItem}
+          onToggleImportant={this.toggleImportant}
+          onToggleDone={this.toggleDone}
+        />
         <TodoListItemAdd onAdd={this.addItem} />
       </div>
     );
