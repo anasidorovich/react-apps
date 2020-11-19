@@ -1,0 +1,11 @@
+@media (min-width: 1200px) {
+.row .list-group {
+  padding-right: 40px;
+}
+}
+@media (max-width: 1199px) {
+.row .list-group {
+   padding-right: 0;
+   padding-bottom: 40px;
+}
+}
