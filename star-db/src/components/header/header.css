@@ -1,5 +1,7 @@
 .navbar-brand {
   color: #fff;
+  font-size: 2em;
+  margin-right: 2rem;
 }
 
 .navbar-dark .navbar-nav .nav-link {
