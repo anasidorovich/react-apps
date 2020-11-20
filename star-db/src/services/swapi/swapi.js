@@ -1,5 +1,7 @@
 export default class SwapiService {
   _apiBase = `https://swapi.dev/api/`;
+  _imgUrl = `https://starwars-visualguide.com/assets/img/planets/`;
+  _defaultImage = 'https://starwars-visualguide.com/assets/img/big-placeholder.jpg';
 
   async getResource(url) {
     const res = await fetch(`${this._apiBase}${url}`);
@@ -9,8 +11,29 @@ export default class SwapiService {
     return await res.json();
   }
 
-  getAllPeople() {
-    return this.getResource(`people/`);
+  async getImageResource(id) {
+      const res = await fetch(`${this._imgUrl}${id}.jpg`);
+      console.log(res);
+      if (!res.ok) {
+        //throw new Error("Fail");
+        return this._defaultImage;
+      }
+      return res.url;
+    }
+
+  async getAllPeople() {
+    const res = await this.getResource(`people/`);
+    return res.results.map(this._transformPerson);
+  }
+
+  async getAllStarships() {
+    const res = await this.getResource(`starships/`);
+    return res.results.map(this._transformStarship);
+  }
+
+  async getAllPlanets() {
+    const res = await this.getResource(`starships/`);
+    return res.results.map(this._transformPlanet);
   }
 
   async getStarship(id) {
@@ -25,6 +48,7 @@ export default class SwapiService {
 
   async getPlanet(id) {
     const planet = await this.getResource(`planets/${id}/`);
+    planet.img = await this.getImageResource(id);
     return this._transformPlanet(planet);
   }
 
@@ -40,7 +64,8 @@ export default class SwapiService {
       name: planet.name,
       population: planet.population,
       rotationPeriod: planet.rotation_period,
-      diameter: planet.diameter
+      diameter: planet.diameter,
+      img: planet.img
     }
   }
 
