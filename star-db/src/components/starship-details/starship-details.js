@@ -6,7 +6,7 @@ export default class StarshipDetails extends Component {
 
   render() {
     return (
-      <div className="random-planet-card col col-lg-12 col-xl-6">
+      <div className="random-planet-card col col-lg-12 col-xl-7">
         <div className="card mb-3">
           <div className="card-image">
             <img src="https://starwars-visualguide.com/assets/img/planets/2.jpg" />
