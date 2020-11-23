@@ -1,7 +1,8 @@
+import defaultImage from './big-placeholder.jpg';
+
 export default class SwapiService {
   _apiBase = `https://swapi.dev/api/`;
   _imgUrl = `https://starwars-visualguide.com/assets/img/planets/`;
-  _defaultImage = 'https://starwars-visualguide.com/assets/img/big-placeholder.jpg';
 
   async getResource(url) {
     const res = await fetch(`${this._apiBase}${url}`);
@@ -12,14 +13,14 @@ export default class SwapiService {
   }
 
   async getImageResource(id) {
-      const res = await fetch(`${this._imgUrl}${id}.jpg`);
-      console.log(res);
-      if (!res.ok) {
-        //throw new Error("Fail");
-        return this._defaultImage;
-      }
-      return res.url;
+    const res = await fetch(`${this._imgUrl}${id}.jpg`);
+    console.log(res);
+    if (!res.ok) {
+      //throw new Error("Fail");
+      return defaultImage;
     }
+    return res.url;
+  }
 
   async getAllPeople() {
     const res = await this.getResource(`people/`);
@@ -57,7 +58,7 @@ export default class SwapiService {
     return entity.url.match(idRegexp)[1];
   }
 
-  _transformPlanet(planet) {
+  _transformPlanet = (planet) => {
     const id = this._extractId(planet);
     return {
       id: id,
@@ -69,7 +70,7 @@ export default class SwapiService {
     }
   }
 
-  _transformPerson(person) {
+  _transformPerson = (person) => {
     const id = this._extractId(person);
     return {
       id: id,
@@ -84,7 +85,7 @@ export default class SwapiService {
     }
   }
 
-  _transformStarship(starship) {
+  _transformStarship = (starship) => {
     const id = this._extractId(starship);
     return {
       id: id,
