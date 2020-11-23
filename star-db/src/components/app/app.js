@@ -1,20 +1,19 @@
 import React, { Component } from 'react';
 import Header from '../header';
 import RandomPlanet from '../random-planet';
-import ItemList from '../item-list';
-import PersonDetails from '../person-details';
+import PeoplePage from '../people-page';
 import ErrorIndicator from '../error-indicator';
 
 import './app.css';
 
 export default class App extends Component {
   state = {
-    personId: null,
     showRandomPlanet: true,
     hasError: false
   }
 
-  componentDidCatch() {
+  componentDidCatch(error, errorInfo) {
+    console.log("catch");
     this.setState({ hasError: true });
   }
 
@@ -26,12 +25,9 @@ export default class App extends Component {
     });
   };
 
-
-  onItemSelected = (personId) => {
-    this.setState({
-      personId: personId
-    })
-  }
+  throwError = () => {
+    this.foo.bar = 0;
+  };
 
   render() {
     if (this.state.hasError) {
@@ -45,13 +41,15 @@ export default class App extends Component {
           <div className="row no-gutters">
             {randomPlanetContent}
           </div>
-          <button type="button" className="btn btn-warning mb-3" onClick={this.toggleRandomPlanet} >
+          <button type="button" className="btn btn-warning mb-3 mr-3" onClick={this.toggleRandomPlanet} >
             Toggle Random Planet
           </button>
-          <div className="row no-gutters">
-            <ItemList onItemSelected={this.onItemSelected} />
-            <PersonDetails personId={this.state.personId} />
-          </div>
+          <button type="button" className="btn btn-danger mb-3" onClick={this.throwError} >
+            Throw Error
+                    </button>
+          <PeoplePage />
+          <PeoplePage />
+          <PeoplePage />
         </div>
       </div>
     );
