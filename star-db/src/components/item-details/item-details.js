@@ -2,44 +2,45 @@ import React, { Component } from 'react';
 import SwapiService from '../../services/swapi/swapi';
 import Spinner from '../spinner';
 
-import './person-details.css';
+import './item-details.css';
 
 export default class PersonDetails extends Component {
   swapiService = new SwapiService();
 
   state = {
-    person: null,
+    item: null,
     loading: true
   }
 
-  updatePerson = () => {
-    const id = this.props.personId;
+  updateItem = () => {
+    const id = this.props.itemId;
     if (!id) {
       return;
     }
     this.setState({
       loading: true
     })
+
     this.swapiService
       .getPerson(id)
-      .then((person) => this.setState({
-        person, loading: false
+      .then((item) => this.setState({
+        item, loading: false
       }));
     //.catch(this.onError);
   };
 
   componentDidMount() {
-    this.updatePerson();
+    this.updateItem();
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.personId !== this.props.personId) {
-      this.updatePerson();
+    if (prevProps.itemId !== this.props.itemId) {
+      this.updateItem();
     }
   }
 
   render() {
-    if (!this.state.person) {
+    if (!this.state.item) {
       return (
         <div className="person-details-card col col-lg-12 col-xl-7">
           <div className="card">
@@ -53,7 +54,7 @@ export default class PersonDetails extends Component {
       );
     }
     const { loading } = this.state;
-    const { id, name, eyeColor, birthYear, gender } = this.state.person;
+    const { id, name, eyeColor, birthYear, gender } = this.state.item;
 
     if (loading) {
       return <Spinner />;

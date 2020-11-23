@@ -13,7 +13,6 @@ export default class App extends Component {
   }
 
   componentDidCatch(error, errorInfo) {
-    console.log("catch");
     this.setState({ hasError: true });
   }
 

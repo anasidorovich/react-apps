@@ -20,7 +20,7 @@ export default class ItemList extends Component {
   renderItems(arr) {
     return arr.map((item) => {
       const { id } = item;
-      const label = this.props.renderItem(item);
+      const label = this.props.children(item);
       return (
         <a href="#" key={id} className="list-group-item list-group-item-action"
           onClick={() => this.props.onItemSelected(id)}>{label}</a>
