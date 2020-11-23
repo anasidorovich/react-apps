@@ -30,8 +30,12 @@ export default class PeoplePage extends Component {
         }
       </ItemList>
     );
+    const { getPerson, getPersonImage } = this.swapiService;
     const itemDetails = (
-      <ItemDetails itemId={this.state.selectedItem} />
+      <ItemDetails
+      getData={getPerson}
+      getImage={getPersonImage}
+      itemId={this.state.selectedItem} />
     );
 
     return (

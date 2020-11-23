@@ -13,7 +13,7 @@ export default class PersonDetails extends Component {
   }
 
   updateItem = () => {
-    const id = this.props.itemId;
+    const { itemId: id, getData} = this.props;
     if (!id) {
       return;
     }
@@ -21,8 +21,7 @@ export default class PersonDetails extends Component {
       loading: true
     })
 
-    this.swapiService
-      .getPerson(id)
+    getData(id)
       .then((item) => this.setState({
         item, loading: false
       }));
@@ -55,6 +54,7 @@ export default class PersonDetails extends Component {
     }
     const { loading } = this.state;
     const { id, name, eyeColor, birthYear, gender } = this.state.item;
+    const image = this.props.getImage(id);
 
     if (loading) {
       return <Spinner />;
@@ -64,7 +64,7 @@ export default class PersonDetails extends Component {
       <div className="person-details-card col col-lg-12 col-xl-7">
         <div className="card mb-3">
           <div className="card-image">
-            <img src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`} />
+            <img src={image} />
           </div>
           <div className="card-main-info">
             <div className="card-body">
