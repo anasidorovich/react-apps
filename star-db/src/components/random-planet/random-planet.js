@@ -64,7 +64,7 @@ const PageView = ({ planet }) => {
   const { name, population, rotationPeriod, diameter, img } = planet;
   return (
     <React.Fragment>
-      <div className="card mb-5">
+      <div className="card mb-3">
         <div className="card-image">
           <img src={img} alt="poster" />
         </div>
