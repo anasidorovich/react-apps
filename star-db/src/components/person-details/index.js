@@ -1,3 +1,3 @@
-import Header from './header';
+import PersonDetails from './person-details';
 
-export default Header;
+export default PersonDetails;

@@ -1,3 +1,3 @@
-import Header from './header';
+import PlanetDetails from './planet-details';
 
-export default Header;
+export default PlanetDetails;

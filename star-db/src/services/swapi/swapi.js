@@ -14,7 +14,6 @@ export default class SwapiService {
 
   async getImageResource(id) {
     const res = await fetch(`${this._imgUrl}${id}.jpg`);
-    console.log(res);
     if (!res.ok) {
       //throw new Error("Fail");
       return defaultImage;
