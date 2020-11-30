@@ -4,6 +4,16 @@ import Spinner from '../spinner';
 
 import './item-details.css';
 
+const Record = ({ item, field, label }) => {
+  return (
+    <li className="list-group-item">{label}: {item[field]}</li>
+  );
+}
+
+export {
+Record
+};
+
 export default class PersonDetails extends Component {
   swapiService = new SwapiService();
 
@@ -52,7 +62,7 @@ export default class PersonDetails extends Component {
         </div>
       );
     }
-    const { loading } = this.state;
+    const { item, loading } = this.state;
     const { id, name, eyeColor, birthYear, gender } = this.state.item;
     const image = this.props.getImage(id);
 
@@ -71,9 +81,11 @@ export default class PersonDetails extends Component {
               <p className="card-text">{name}</p>
             </div>
             <ul className="list-group list-group-flush">
-              <li className="list-group-item">Birth Year: {birthYear}</li>
-              <li className="list-group-item">Eye Color(s): {eyeColor}</li>
-              <li className="list-group-item">Gender: {gender}</li>
+              {
+                React.Children.map( this.props.children, (child) =>  {
+                   return React.cloneElement(child, {item});
+                })
+              }
             </ul>
           </div>
         </div>

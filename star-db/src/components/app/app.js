@@ -7,16 +7,33 @@ import ErrorIndicator from '../error-indicator';
 import ItemDetails from '../item-details';
 import ErrorBoundry from '../error-boundry';
 import SwapiService from '../../services/swapi/swapi';
+import {
+  PlanetDetails,
+  PersonDetails,
+  StarshipDetails,
+  PlanetList,
+  PersonList,
+  StarshipList
+} from "../sw-components";
 
 import './app.css';
 
+
 export default class App extends Component {
   swapiService = new SwapiService();
-  
+
   state = {
     showRandomPlanet: true,
-    hasError: false
-  }
+    hasError: false,
+    selectedItem: 1
+  };
+
+  onItemSelected = (itemId) => {
+    this.setState({
+      selectedItem: itemId
+    });
+  };
+
 
   componentDidCatch(error, errorInfo) {
     this.setState({ hasError: true });
@@ -38,15 +55,9 @@ export default class App extends Component {
     if (this.state.hasError) {
       return <ErrorIndicator />;
     }
-    const { getPerson, getPersonImage, getStarship, getStarshipImage } = this.swapiService;
 
     const randomPlanetContent = this.state.showRandomPlanet ? <RandomPlanet /> : null;
-    const personDetails = (
-      <ItemDetails getData={getPerson} getImage={getPersonImage} itemId={7} />
-    );
-    const starshipDetails = (
-      <ItemDetails getData={getStarship} getImage={getStarshipImage} itemId={5} />
-    );
+
     return (
       <div className="app">
         <Header />
@@ -60,9 +71,13 @@ export default class App extends Component {
           <button type="button" className="btn btn-danger mb-3" onClick={this.throwError} >
             Throw Error
           </button>
-          <PeoplePage />
           <ErrorBoundry>
-            <Row left={personDetails} right={starshipDetails} />
+            <div className="row no-gutters">
+              <PersonList onItemSelected={this.onItemSelected} >
+                {({ name }) => <span> {name} </span>}
+              </PersonList>
+              <PersonDetails id={this.state.selectedItem} />
+            </div>
           </ErrorBoundry>
         </div>
       </div>
