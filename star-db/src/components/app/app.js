@@ -30,7 +30,7 @@ export default class App extends Component {
     showRandomPlanet: true,
     hasError: false,
     selectedItem: 1,
-    swapiService: new DummySwapiService()
+    swapiService: new SwapiService()
   };
 
   onItemSelected = (itemId) => {
@@ -89,6 +89,14 @@ export default class App extends Component {
               <div className="row no-gutters">
                 <PersonList onItemSelected={this.onItemSelected} />
                 <PersonDetails itemId={this.state.selectedItem} />
+              </div>
+              <div className="row no-gutters">
+                <PlanetList onItemSelected={this.onItemSelected} />
+                <PlanetDetails itemId={7} />
+              </div>
+              <div className="row no-gutters">
+                <StarshipList onItemSelected={this.onItemSelected} />
+                <StarshipDetails itemId={13} />
               </div>
             </SwapiServiceProvider>
           </ErrorBoundry>

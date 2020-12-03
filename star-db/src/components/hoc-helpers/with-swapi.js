@@ -5,18 +5,18 @@ import {
 
 const withSwapiService = (Wrapped, mapToProps) => {
   return (props) => {
-      return (
-        <SwapiServiceConsumer>
+    return (
+      <SwapiServiceConsumer>
         {
-         (swapiService) => {
-            const swapiProps = mapToProps(swapiService);
+          (swapiService) => {
+            const swapiProps = mapToProps ? mapToProps(swapiService) : null;
             return (
-              <Wrapped {... props} { ...swapiProps } swapiService={swapiService} />
+              <Wrapped {...props} {...swapiProps} swapiService={swapiService} />
             );
-         }
+          }
         }
-       </SwapiServiceConsumer>
-       );
+      </SwapiServiceConsumer>
+    );
   }
 }
 

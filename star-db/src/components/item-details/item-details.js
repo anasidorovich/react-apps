@@ -11,7 +11,7 @@ const Record = ({ item, field, label }) => {
 }
 
 export {
-Record
+  Record
 };
 
 export default class PersonDetails extends Component {
@@ -23,7 +23,7 @@ export default class PersonDetails extends Component {
   }
 
   updateItem = () => {
-    const { itemId: id, getData} = this.props;
+    const { itemId: id, getData } = this.props;
     if (!id) {
       return;
     }
@@ -65,8 +65,8 @@ export default class PersonDetails extends Component {
       );
     }
     const { item, loading } = this.state;
-    const { id, name, eyeColor, birthYear, gender } = this.state.item;
-    const image = this.props.getImage(id);
+    const { id, img, name, eyeColor, birthYear, gender } = this.state.item;
+    const image = img || this.props.getImage(id);
 
     if (loading) {
       return <Spinner />;
@@ -84,8 +84,8 @@ export default class PersonDetails extends Component {
             </div>
             <ul className="list-group list-group-flush">
               {
-                React.Children.map( this.props.children, (child) =>  {
-                   return React.cloneElement(child, {item});
+                React.Children.map(this.props.children, (child) => {
+                  return React.cloneElement(child, { item });
                 })
               }
             </ul>

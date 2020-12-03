@@ -43,8 +43,10 @@ let StarshipDetails = ({ itemId: id, swapiService }) => {
       getData={getStarship}
       getImage={getStarshipImage}
       itemId={id}>
-      <Record field="b1" label="b1" />
-      <Record field="b1" label="b1" />
+      <Record field="model" label="Model" />
+      <Record field="cost" label="Cost" />
+      <Record field="speed" label="Speed" />
+      <Record field="capacity" label="Capacity" />
     </ItemDetails>
   );
 }

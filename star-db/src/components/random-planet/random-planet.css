@@ -4,8 +4,8 @@
 }
 
 .card-image img {
-   height: 250px;
-   width: auto;
+   height: auto;
+   width: 250px;
    border-radius: .25rem;
    margin: 30px;
 }

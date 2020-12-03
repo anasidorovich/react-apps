@@ -7,7 +7,7 @@ export default class SwapiService {
   async getResource(url) {
     const res = await fetch(`${this._apiBase}${url}`);
     if (!res.ok) {
-      throw new Error("Fail");
+      throw new Error("Fail", res);
     }
     return await res.json();
   }
