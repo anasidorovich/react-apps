@@ -26,6 +26,9 @@ export default class Header extends Component {
               <a className="nav-link" href="#">Starships</a>
             </li>
           </ul>
+          <button type="button" className="btn btn-success mt-1" onClick={this.props.onServiceChange} >
+             Change Service
+          </button>
         </div>
       </nav>
     );

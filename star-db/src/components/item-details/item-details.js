@@ -43,7 +43,9 @@ export default class PersonDetails extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.itemId !== this.props.itemId) {
+    if (prevProps.itemId !== this.props.itemId ||
+      prevProps.getData !== this.props.getData ||
+      prevProps.getImage !== this.props.getImage) {
       this.updateItem();
     }
   }

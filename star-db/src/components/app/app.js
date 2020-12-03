@@ -6,6 +6,7 @@ import PeoplePage from '../people-page';
 import ErrorIndicator from '../error-indicator';
 import ItemDetails from '../item-details';
 import ErrorBoundry from '../error-boundry';
+import SwapiService from '../../services/swapi/swapi';
 import DummySwapiService from '../../services/swapi/dummy-swapi';
 import {
   PlanetDetails,
@@ -24,12 +25,12 @@ import './app.css';
 
 
 export default class App extends Component {
-  swapiService = new DummySwapiService();
 
   state = {
     showRandomPlanet: true,
     hasError: false,
-    selectedItem: 1
+    selectedItem: 1,
+    swapiService: new DummySwapiService()
   };
 
   onItemSelected = (itemId) => {
@@ -38,6 +39,14 @@ export default class App extends Component {
     });
   };
 
+  onServiceChange = () => {
+    this.setState((state) => {
+      const Service = state.swapiService instanceof DummySwapiService ? SwapiService : DummySwapiService;
+      return {
+        swapiService: new Service()
+      }
+    });
+  }
 
   componentDidCatch(error, errorInfo) {
     this.setState({ hasError: true });
@@ -64,7 +73,7 @@ export default class App extends Component {
 
     return (
       <div className="app">
-        <Header />
+        <Header onServiceChange={this.onServiceChange} />
         <div className="content">
           <div className="row no-gutters">
             {randomPlanetContent}
@@ -76,7 +85,7 @@ export default class App extends Component {
             Throw Error
           </button>
           <ErrorBoundry>
-            <SwapiServiceProvider value={this.swapiService}>
+            <SwapiServiceProvider value={this.state.swapiService}>
               <div className="row no-gutters">
                 <PersonList onItemSelected={this.onItemSelected} />
                 <PersonDetails itemId={this.state.selectedItem} />

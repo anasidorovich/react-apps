@@ -27,9 +27,8 @@ let PlanetDetails = ({ itemId: id, swapiService }) => {
 }
 
 let PersonDetails = (props) => {
-  console.log(props);
   return (
-    <ItemDetails { ...props }>
+    <ItemDetails {...props}>
       <Record field="birthYear" label="Birth Year" />
       <Record field="eyeColor" label="Eye Color(s)" />
       <Record field="gender" label="Gender" />
