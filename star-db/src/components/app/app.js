@@ -6,7 +6,7 @@ import PeoplePage from '../people-page';
 import ErrorIndicator from '../error-indicator';
 import ItemDetails from '../item-details';
 import ErrorBoundry from '../error-boundry';
-import SwapiService from '../../services/swapi/swapi';
+import DummySwapiService from '../../services/swapi/dummy-swapi';
 import {
   PlanetDetails,
   PersonDetails,
@@ -24,7 +24,7 @@ import './app.css';
 
 
 export default class App extends Component {
-  swapiService = new SwapiService();
+  swapiService = new DummySwapiService();
 
   state = {
     showRandomPlanet: true,
@@ -79,7 +79,7 @@ export default class App extends Component {
             <SwapiServiceProvider value={this.swapiService}>
               <div className="row no-gutters">
                 <PersonList onItemSelected={this.onItemSelected} />
-                <PersonDetails id={this.state.selectedItem} />
+                <PersonDetails itemId={this.state.selectedItem} />
               </div>
             </SwapiServiceProvider>
           </ErrorBoundry>
