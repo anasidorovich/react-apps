@@ -16,6 +16,10 @@ import {
   StarshipList
 } from "../sw-components";
 
+import {
+  SwapiServiceProvider
+} from "../swapi-service-context";
+
 import './app.css';
 
 
@@ -72,12 +76,12 @@ export default class App extends Component {
             Throw Error
           </button>
           <ErrorBoundry>
-            <div className="row no-gutters">
-              <PersonList onItemSelected={this.onItemSelected} >
-                {({ name }) => <span> {name} </span>}
-              </PersonList>
-              <PersonDetails id={this.state.selectedItem} />
-            </div>
+            <SwapiServiceProvider value={this.swapiService}>
+              <div className="row no-gutters">
+                <PersonList onItemSelected={this.onItemSelected} />
+                <PersonDetails id={this.state.selectedItem} />
+              </div>
+            </SwapiServiceProvider>
           </ErrorBoundry>
         </div>
       </div>
