@@ -8,17 +8,21 @@ const ItemList = (props) => {
     const { id } = item;
     const label = renderLabel(item);
     return (
-      <a href="#" key={id} className="list-group-item list-group-item-action"
-        onClick={() => onItemSelected(id)}>{label}</a>
+      <li key={id} className="list-group-item list-group-item-action"
+        onClick={() => onItemSelected(id)}>{label}</li>
     );
   });
 
   return (
-    <div className="list-group pr-xl-4 pb-5 col-12 col-lg-12 col-xl-5">
+    <ul className="list-group pr-xl-4 pb-5 col-12 col-lg-12 col-xl-5">
       {items}
-    </div>
+    </ul>
   );
 
+};
+
+ItemList.defaultProps = {
+  onItemSelected: () => { }
 };
 
 export default ItemList;

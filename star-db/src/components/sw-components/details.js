@@ -1,8 +1,4 @@
 import ItemDetails, { Record } from '../item-details';
-import SwapiService from '../../services/swapi/swapi';
-import {
-  SwapiServiceConsumer
-} from "../swapi-service-context";
 import { withSwapiService } from "../hoc-helpers";
 
 const mapToProps = (swapiService) => {
@@ -50,9 +46,10 @@ let StarshipDetails = ({ itemId: id, swapiService }) => {
     </ItemDetails>
   );
 }
-PlanetDetails = withSwapiService(PlanetDetails);
-PersonDetails = withSwapiService(PersonDetails, mapToProps);
-StarshipDetails = withSwapiService(StarshipDetails);
+PlanetDetails = withSwapiService()(PlanetDetails);
+PersonDetails = withSwapiService(mapToProps)(PersonDetails);
+StarshipDetails = withSwapiService()(StarshipDetails);
+
 export {
   PlanetDetails,
   PersonDetails,
