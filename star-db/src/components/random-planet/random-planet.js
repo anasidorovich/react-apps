@@ -9,9 +9,23 @@ import ErrorIndicator from '../error-indicator';
 export default class RandomPlanet extends Component {
   swapiService = new SwapiService();
 
+  static defaultProps = {
+    updateInterval: 2500
+  }
+
+  static propTypes = {
+    updatePlanet: (props, propName, compName) => {
+       const value = props[propName];
+       if (typeof value === 'number' && !isNaN(value)) {
+         return null;
+       }
+       return new TypeError();
+    }
+  }
+
   componentDidMount() {
     this.updatePlanet();
-    this.interval = setInterval(this.updatePlanet, 2500);
+    this.interval = setInterval(this.updatePlanet, this.props.updateInterval);
   }
 
   componentWillUnmount() {
