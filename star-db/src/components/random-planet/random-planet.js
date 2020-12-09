@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import PropTypes from "prop-types";
 import './random-planet.css';
 
 import SwapiService from '../../services/swapi/swapi';
@@ -14,13 +14,7 @@ export default class RandomPlanet extends Component {
   }
 
   static propTypes = {
-    updatePlanet: (props, propName, compName) => {
-       const value = props[propName];
-       if (typeof value === 'number' && !isNaN(value)) {
-         return null;
-       }
-       return new TypeError();
-    }
+    updatePlanet: PropTypes.number
   }
 
   componentDidMount() {
