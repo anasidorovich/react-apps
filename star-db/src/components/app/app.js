@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Header from '../header';
 import RandomPlanet from '../random-planet';
 import { PeoplePage, PlanetsPage, StarshipsPage } from "../pages";
@@ -44,22 +45,26 @@ export default class App extends Component {
 
     return (
       <div className="app">
-        <Header onServiceChange={this.onServiceChange} />
-        <div className="content">
-          <div className="row no-gutters">
-            {randomPlanetContent}
-          </div>
-          <button type="button" className="btn btn-danger mb-3" onClick={this.throwError} >
-            Throw Error
+        <Router>
+          <Header onServiceChange={this.onServiceChange} />
+          <div className="content">
+            <div className="row no-gutters">
+              {randomPlanetContent}
+            </div>
+            <button type="button" className="btn btn-danger mb-3" onClick={this.throwError} >
+              Throw Error
           </button>
-          <ErrorBoundry>
-            <SwapiServiceProvider value={this.state.swapiService}>
-              <PeoplePage />
-              <PlanetsPage />
-              <StarshipsPage />
-            </SwapiServiceProvider>
-          </ErrorBoundry>
-        </div>
+            <ErrorBoundry>
+              <SwapiServiceProvider value={this.state.swapiService}>
+                <Route path="/" render={() => <h2>Welcome</h2>} exact />
+                <Route path="/people" component={PeoplePage} />
+                <Route path="/planets" component={PlanetsPage} />
+                <Route path="/starships" component={StarshipsPage} />
+
+              </SwapiServiceProvider>
+            </ErrorBoundry>
+          </div>
+        </Router>
       </div>
     );
   }

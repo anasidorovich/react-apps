@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { Link } from 'react-router-dom';
 import './header.css';
 
 export default class Header extends Component {
@@ -7,7 +7,7 @@ export default class Header extends Component {
   render() {
     return (
       <nav className="navbar navbar-expand-lg navbar-dark">
-        <a className="navbar-brand" href="#">Star DB</a>
+        <Link className="navbar-brand" to="/">Star DB</Link>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
@@ -15,19 +15,19 @@ export default class Header extends Component {
         <div className="collapse navbar-collapse" id="navbarColor02">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item active">
-              <a className="nav-link" href="#">People
+              <Link className="nav-link" to="/people">People
                 <span className="sr-only">(current)</span>
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">Planets</a>
+              <Link className="nav-link" to="/planets">Planets</Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">Starships</a>
+              <Link className="nav-link" to="/starships">Starships</Link>
             </li>
           </ul>
           <button type="button" className="btn btn-success mt-1" onClick={this.props.onServiceChange} >
-             Change Service
+            Change Service
           </button>
         </div>
       </nav>
