@@ -15,15 +15,15 @@ export default class Header extends Component {
         <div className="collapse navbar-collapse" id="navbarColor02">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item active">
-              <Link className="nav-link" to="/people">People
+              <Link className="nav-link" to="/people/">People
                 <span className="sr-only">(current)</span>
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/planets">Planets</Link>
+              <Link className="nav-link" to="/planets/">Planets</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/starships">Starships</Link>
+              <Link className="nav-link" to="/starships/">Starships</Link>
             </li>
           </ul>
           <button type="button" className="btn btn-success mt-1" onClick={this.props.onServiceChange} >
